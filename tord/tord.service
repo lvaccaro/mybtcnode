@@ -1,0 +1,28 @@
+[Unit]
+Description=Anonymizing Overlay Network
+After=syslog.target network.target nss-lookup.target
+
+[Service]
+ExecStart=/usr/local/bin/tor --runasdaemon 0 -f /etc/tor/torrc --quiet
+ExecReload=/usr/bin/kill -HUP $MAINPID
+
+# Process management
+####################
+
+Type=simple
+PIDFile=/home/satoshi/tor.pid
+Restart=on-failure
+TimeoutStopSec=600
+KillSignal=SIGINT
+PrivateDevices=yes
+PermissionsStartOnly=true
+PrivateTmp=yes
+
+# Directory creation and permissions
+####################################
+
+User=satoshi
+Group=satoshi
+
+[Install]
+WantedBy=multi-user.target
