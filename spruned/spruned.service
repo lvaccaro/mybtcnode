@@ -1,0 +1,16 @@
+# sPRUNED: systemd unit
+# /etc/systemd/system/spruned.service
+
+[Unit]
+Description=sPRUNED Bitcoin node
+After=network.target
+
+[Service]
+ExecStart=/home/satoshi/spruned/venv/bin/spruned --network bitcoin.mainnet --rpcuser RPCUSER --rpcpassword RPCPASSWORD 
+Type=simple
+User=satoshi
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
