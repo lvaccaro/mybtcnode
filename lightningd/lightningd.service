@@ -1,0 +1,19 @@
+[Unit]
+Description=C-Lightning daemon
+Requires=bitcoind.service
+After=bitcoind.service tord.service
+
+[Service]
+ExecStart=/usr/local/bin/lightningd --network bitcoin --log-level debug --bitcoin-cli /home/satoshi/bcli-esplora.sh  --plugin=/home/satoshi/plugins/commando/commando.py
+PIDFile=/home/satoshi/.lightning/lightningd.pid
+Type=simple
+KillMode=process
+TimeoutSec=180
+Restart=always
+RestartSec=60
+
+User=satoshi
+Group=satoshi
+
+[Install]
+WantedBy=multi-user.target
