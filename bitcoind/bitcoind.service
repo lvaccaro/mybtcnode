@@ -1,0 +1,28 @@
+[Unit]
+Description=Bitcoin daemon
+Requires=tord.service
+After=network.target tord.service
+
+[Service]
+ExecStart=/usr/bin/bitcoind -daemon -pid=/home/satoshi/.bitcoin/bitcoind.pid -par=3 -rpcthreads=3 -dbcache=400 -prune=5000 -proxy=127.0.0.1:9050
+ExecReload=/usr/bin/bitcoin-cli stop
+
+# Process management
+####################
+
+Type=simple
+PIDFile=/home/satoshi/.bitcoin/bitcoind.pid
+Restart=on-failure
+TimeoutStartSec=infinity
+TimeoutStopSec=600
+PermissionsStartOnly=true
+PrivateTmp=yes
+
+# Directory creation and permissions
+####################################
+
+User=satoshi
+Group=satoshi
+
+[Install]
+WantedBy=multi-user.target
