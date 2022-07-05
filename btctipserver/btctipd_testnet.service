@@ -1,0 +1,18 @@
+[Unit]
+Description=BtcTipserver testnet daemon
+After=tord.service
+
+[Service]
+ExecStart=/usr/local/bin/btctipserver --host 127.0.0.1 --port PORT testnet --network testnet --wallet btctip --server "ssl://blockstream.info:993" --descriptor "DESCRIPTOR"
+PIDFile=/home/satoshi/.btctipserver/testnet.pid
+Type=simple
+KillMode=process
+TimeoutSec=180
+Restart=always
+RestartSec=60
+
+User=satoshi
+Group=satoshi
+
+[Install]
+WantedBy=multi-user.target

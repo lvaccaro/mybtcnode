@@ -1,0 +1,18 @@
+[Unit]
+Description=BtcTipserver liquid daemon
+After=tord.service
+
+[Service]
+ExecStart=/usr/local/bin/btctipserver --host 127.0.0.1 --port PORT liquid --network liquid --wallet btctip --server "ssl://blockstream.info:995" --descriptor "DESCRIPTOR" --descriptor "MASTER_BLINDING_KEY"
+PIDFile=/home/satoshi/.btctipserver/liquid.pid
+Type=simple
+KillMode=process
+TimeoutSec=180
+Restart=always
+RestartSec=60
+
+User=satoshi
+Group=satoshi
+
+[Install]
+WantedBy=multi-user.target
