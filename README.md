@@ -3,6 +3,10 @@ My bitcoin node setup
 
 My lightning box setup on odroid.
 
+Platform:
+- Hardware: Odroid XU4S
+- Operative system: Linux Ubuntu jammy
+
 Inspired from [@Stadicus setup_clightning gist](https://gist.github.com/Stadicus/a05c3c5ac6a63cdcfe1aae2b77f17cba#file-setup_clightning-md).
 
 ### Tord
