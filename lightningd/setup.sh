@@ -10,6 +10,12 @@ echo "announce-addr=$ENDPOINT" >> /home/satoshi/.lightning/config
 cp bcli-esplora.sh /home/satoshi/
 chmod +x /home/satoshi/bcli-esplora.sh
 
+# setup clnurl plugin
+git clone https://github.com/elsirion/clnurl
+cd clnurl
+cargo build -r
+cd ..
+
 # setup commando plugin
 git checkout https://github.com/lightningd/plugins.git
 cd plugins
@@ -40,3 +46,11 @@ runuser -l satoshi -c '/usr/bin/lightningd-cli getblockchaininfo'
 nodehost=$(lightning-cli getinfo | jq -r '. as $r | .address[0] | "\($r.id)@\(.address):\(.port)"')
 token=$(lightning-cli commando-rune restrictions=readonly | jq -r '.rune | @uri')
 echo "lnlink:$nodehost?token=$token"
+
+# run example 
+/usr/local/bin/lightningd --network bitcoin --log-level debug \
+ --bitcoin-cli /opt/bcli-esplora.sh \
+ --plugin=/opt/plugins/commando/commando.py \
+ --plugin=/opt/clnurl/target/release/clnurl \
+ --clnurl_base_address=https://lvaccaro.com/lnurl_api
+
