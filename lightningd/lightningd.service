@@ -4,7 +4,8 @@ Requires=bitcoind.service
 After=bitcoind.service tord.service
 
 [Service]
-ExecStart=/usr/local/bin/lightningd --network bitcoin --log-level debug --bitcoin-cli /home/satoshi/bcli-esplora.sh  --plugin=/home/satoshi/plugins/commando/commando.py
+ExecStart=/usr/local/bin/lightningd --daemon --network bitcoin --log-level debug --bitcoin-cli /opt/bcli-esplora.sh --bitcoin-datadir /media/sdcard/bitcoin_data --lightning-dir /media/sdcard/lightning_data
+ExecReload=/usr/local/bin/lightning-cli --lightning-dir /media/sdcard/lightning_data stop
 PIDFile=/home/satoshi/.lightning/lightningd.pid
 Type=simple
 KillMode=process

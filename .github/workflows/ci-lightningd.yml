@@ -1,0 +1,16 @@
+name: CI Lightningd
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout Project
+          uses: actions/checkout@v1
+        - name: Update
+          run: sudo apt-get update
+        - name: Setup
+          run: sudo sh setup.sh
+        - name: Login
+          run: sudo su satoshi && cd
+        - name: lightning
+          run: sh ./lightningd/install.sh && sh ./lightningd/setup.sh

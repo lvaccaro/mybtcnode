@@ -4,8 +4,9 @@ Requires=tord.service
 After=network.target tord.service
 
 [Service]
-ExecStart=/usr/bin/bitcoind -daemon -pid=/home/satoshi/.bitcoin/bitcoind.pid -par=3 -rpcthreads=3 -dbcache=400 -prune=5000 -proxy=127.0.0.1:9050
-ExecReload=/usr/bin/bitcoin-cli stop
+#ExecStart=/usr/local/bin/bitcoind -daemon -pid=/home/satoshi/.bitcoin/bitcoind.pid -par=3 -rpcthreads=3 -dbcache=400 -prune=5000 -proxy=127.0.0.1:9050
+ExecStart=/usr/local/bin/bitcoind -daemon -pid=/home/satoshi/.bitcoin/bitcoind.pid -prune=5000 -proxy=127.0.0.1:9050 -bitcoin -datadir=/media/sdcard/bitcoin_data
+ExecReload=/usr/local/bin/bitcoin-cli -datadir=/media/sdcard/bitcoin_data stop
 
 # Process management
 ####################
